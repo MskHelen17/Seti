@@ -86,7 +86,8 @@ public class room {
 
     }
 
-    public void onClickSend() {
+    @SuppressWarnings("unchecked")
+	public void onClickSend() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -126,7 +127,8 @@ public class room {
 
     }
 
-    public void exit() {
+    @SuppressWarnings("deprecation")
+	public void exit() {
         Stage stage;
         stage = (Stage) myMsg.getScene().getWindow();
         //Parent parent = FXMLLoader.load(getClass().getResource("room.fxml"));

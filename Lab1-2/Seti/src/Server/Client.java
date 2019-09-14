@@ -37,7 +37,7 @@ public class Client {
                     JSONObject msg = (JSONObject) parser.parse(message);
 
                     if (Objects.equals(msg.get("message"), "/users")) {
-                        listUsers = "\n----------------------------------\nРЎРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№: \n";
+                        listUsers = "\n----------------------------------\nСписок пользователей: \n";
                         List<Client> entry = Server.clients;
                         for (Client cli : entry) {
                             listUsers = listUsers + "\t" + cli.name + "\n";

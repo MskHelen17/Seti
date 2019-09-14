@@ -14,14 +14,14 @@ import java.util.Objects;
 public class Server {
 
     public static List<Client> clients;
-    public static List<String> banList = new ArrayList<>();
+    public static List<String> banClients = new ArrayList<>();
     public static DataOutputStream dos;
     DataInputStream dis;
 
     Server() {
 
-        banList.add("asdf");
-        System.out.println("Server");
+        banClients.add("Roman");
+        System.out.println("Сервер запущен!");
 
         String name;
         Socket client;
@@ -29,10 +29,10 @@ public class Server {
         clients = new ArrayList<Client>();
 
         try {
-            ServerSocket servSock = new ServerSocket(10001);
+            ServerSocket server = new ServerSocket(10001);
 
             while(true) {
-                client = servSock.accept();
+                client = server.accept();
                 dis = new DataInputStream(client.getInputStream());
                 dos = new DataOutputStream(client.getOutputStream());
 
@@ -40,7 +40,7 @@ public class Server {
 
                 name = dis.readUTF();
                 boolean flagBan = false;
-                List<String> ban = Server.banList;
+                List<String> ban = Server.banClients;
                 for (String elem : ban) {
                     if (Objects.equals(name, elem)){
                         dos.writeUTF("{ \"name\" : \"" + "[ SERVER NOTICE ]" + "\", \"message\" : \"" + name +"\n\nВы забанены!" + "\", \"time\" : \"" + fdate.format(new Date()) + "\"}");
@@ -52,11 +52,11 @@ public class Server {
                 }
 
                 Client user = new Client(name, dos, dis);
-                System.out.println("Connected : " + name);
+                System.out.println("Подключился: " + name);
                 clients.add(user);
 
                 String enter_message = "{ \"name\" : \"" + "[ SERVER NOTICE ]" + "\", \"message\" : \"" + name +" Connected" + "\", \"time\" : \"" + fdate.format(new Date()) + "\"}";
-                System.out.println(enter_message);
+                //System.out.println(enter_message);
 
                 broadcast(enter_message);
 

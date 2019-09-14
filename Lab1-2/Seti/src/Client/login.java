@@ -37,7 +37,8 @@ public class login {
     }
 
 
-    public void onClick() throws IOException{
+    @SuppressWarnings("deprecation")
+	public void onClick() throws IOException{
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
@@ -61,8 +62,9 @@ public class login {
 
         Socket sock;
         try {
-            sock = new Socket(data.ip, data.port);
+            sock = new Socket(data.ip, 10001);//data.port
         } catch (Exception E) {
+        	System.err.println(E.getMessage());
             alert.setContentText("Ошибка подключения к серверу. \nПроверьте введенные данные.");
             alert.showAndWait();
             return;
